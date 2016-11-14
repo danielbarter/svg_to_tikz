@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for file in $@
+do
+  TEX_FILE=${file/%.svg/.tex}
+
+  if [ ! -e ./tex_files/$TEX_FILE ]
+  then
+    python2 ./svg2tikz/svg2tikz.py -o $TEX_FILE $file
+    mv $TEX_FILE ./tex_files
+  else
+    echo "./tex_files/$TEX_FILE already exists"
+  fi
+done
